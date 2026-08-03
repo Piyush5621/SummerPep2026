@@ -10,21 +10,64 @@ import InstructorDashboard from './pages/InstructorDashboard';
 
 function HeroRedirect() {
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center text-center px-4 animate-fade-up">
-      <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-purple-500 to-violet-700 shadow-2xl shadow-purple-900/50 mb-6">
-        <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
-      </div>
-      <h1 className="text-5xl sm:text-6xl font-extrabold text-white mb-4 leading-tight">
-        Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-300">StudyStack</span>
-      </h1>
-      <p className="text-slate-400 text-lg sm:text-xl max-w-xl mb-10">
-        The modern platform for learners and instructors. Explore courses, manage content, and grow your skills.
-      </p>
-      <div className="flex gap-4 flex-wrap justify-center">
-        <a href="/courses" className="btn-primary text-base px-8 py-3">Browse Courses</a>
-        <a href="/register" className="btn-secondary text-base px-8 py-3">Get Started Free</a>
+    <div className="min-h-[82vh] flex items-center justify-center px-4 py-16 animate-fade-up">
+      <div className="w-full max-w-6xl grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-center">
+        <div className="text-left">
+          <span className="study-pill mb-5">Study-focused learning</span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight">
+            Learn with calm focus and <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-blue-400">clear direction</span>
+          </h1>
+          <p className="text-slate-400 text-lg sm:text-xl max-w-2xl mb-8">
+            StudyStack brings together guided lessons, practical practice, and a smooth learning flow for students who want to grow every day.
+          </p>
+          <div className="flex gap-4 flex-wrap justify-start">
+            <a href="/courses" className="btn-primary text-base px-8 py-3">Explore Courses</a>
+            <a href="/register" className="btn-secondary text-base px-8 py-3">Join as Learner</a>
+          </div>
+
+          <div className="mt-8 grid sm:grid-cols-3 gap-3">
+            {[
+              ['24/7', 'Access'],
+              ['100+', 'Lessons'],
+              ['1:1', 'Support']
+            ].map(([value, label]) => (
+              <div key={label} className="glass p-3 rounded-2xl">
+                <p className="text-xl font-semibold text-white">{value}</p>
+                <p className="text-sm text-slate-400">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="study-shell glass p-6 md:p-8">
+          <div className="flex items-center justify-between mb-5">
+            <div>
+              <p className="text-sm text-slate-400">Today’s focus</p>
+              <h2 className="text-xl font-semibold text-white">Practice with purpose</h2>
+            </div>
+            <span className="study-pill">Live learning</span>
+          </div>
+
+          <div className="rounded-2xl border border-sky-400/20 bg-slate-950/40 p-4">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-sm font-medium text-slate-300">Study path</span>
+              <span className="text-sm text-emerald-400">On track</span>
+            </div>
+            <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
+              <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-sky-400 to-blue-500" />
+            </div>
+            <p className="text-sm text-slate-400 mt-3">Complete your next module and keep your momentum going.</p>
+          </div>
+
+          <div className="mt-5 space-y-3 text-sm text-slate-300">
+            {['Weekly lessons curated for you', 'Short practice tasks after every topic', 'Clear progress reminders to stay consistent'].map((item) => (
+              <div key={item} className="flex items-center gap-2 rounded-xl bg-white/5 px-3 py-2">
+                <span className="w-2 h-2 rounded-full bg-sky-400" />
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -37,10 +80,10 @@ export default function App() {
         <Navbar />
         <main className="flex-1">
           <Routes>
-            <Route path="/"          element={<HeroRedirect />} />
-            <Route path="/login"     element={<LoginPage />} />
-            <Route path="/register"  element={<RegisterPage />} />
-            <Route path="/courses"   element={<CoursesPage />} />
+            <Route path="/" element={<HeroRedirect />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/courses" element={<CoursesPage />} />
             <Route path="/courses/:id" element={<CourseDetailPage />} />
             <Route path="/dashboard" element={
               <ProtectedRoute requireInstructor>
@@ -51,10 +94,9 @@ export default function App() {
           </Routes>
         </main>
 
-        {/* Footer */}
-        <footer className="border-t border-purple-900/20 py-6 mt-8">
+        <footer className="border-t border-sky-900/20 py-6 mt-8">
           <p className="text-center text-slate-600 text-sm">
-            © {new Date().getFullYear()} StudyStack — Built with React + Node.js
+            © {new Date().getFullYear()} StudyStack — Learn steadily, grow confidently
           </p>
         </footer>
       </div>

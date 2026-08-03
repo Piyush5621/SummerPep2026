@@ -4,24 +4,23 @@ export default function CourseCard({ course, onEdit, onDelete, showActions = fal
   const { _id, title, price, instructor, createdAt } = course;
 
   return (
-    <div className="glass p-6 flex flex-col gap-4 hover:border-purple-600/40 transition-all duration-300 group"
+    <div className="glass p-6 flex flex-col gap-4 hover:border-sky-500/40 transition-all duration-300 group"
       style={{ transform: 'translateY(0)', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}
-      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(124,58,237,0.2)'; }}
-      onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)';  e.currentTarget.style.boxShadow = ''; }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(79,140,255,0.18)'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = ''; }}
     >
-      {/* Top Row */}
       <div className="flex items-start justify-between gap-2">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-violet-700 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-purple-900/40 shrink-0">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-sky-900/30 shrink-0">
           {title?.[0]?.toUpperCase()}
         </div>
-        <span className="text-xl font-bold text-emerald-400">
-          ₹{Number(price).toLocaleString('en-IN')}
-        </span>
+        <div className="flex flex-wrap gap-2 justify-end">
+          <span className="study-chip">Live lesson</span>
+          <span className="study-chip">Practice</span>
+        </div>
       </div>
 
-      {/* Title */}
       <div>
-        <h3 className="font-semibold text-white text-lg leading-snug group-hover:text-purple-300 transition-colors">
+        <h3 className="font-semibold text-white text-lg leading-snug group-hover:text-sky-300 transition-colors">
           {title}
         </h3>
         <p className="text-slate-400 text-sm mt-1 flex items-center gap-1">
@@ -32,7 +31,13 @@ export default function CourseCard({ course, onEdit, onDelete, showActions = fal
         </p>
       </div>
 
-      {/* Footer */}
+      <div className="rounded-2xl border border-white/10 bg-slate-950/35 p-3 text-sm text-slate-300">
+        <div className="flex items-center justify-between">
+          <span>Study-ready path</span>
+          <span className="text-emerald-400 font-medium">Focus mode</span>
+        </div>
+      </div>
+
       <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
         {createdAt && (
           <span className="text-[11px] text-slate-500">
@@ -46,13 +51,15 @@ export default function CourseCard({ course, onEdit, onDelete, showActions = fal
             <button onClick={() => onDelete(_id)} className="btn-danger py-1 px-3 text-xs">Delete</button>
           </div>
         ) : (
-          <Link to={`/courses/${_id}`}
-            className="text-xs font-semibold text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-1 ml-auto">
-            View Details
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
-            </svg>
-          </Link>
+          <div className="ml-auto flex items-center gap-3">
+            <span className="text-sm font-semibold text-sky-300">₹{Number(price).toLocaleString('en-IN')}</span>
+            <Link to={`/courses/${_id}`} className="text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-1">
+              Open
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+              </svg>
+            </Link>
+          </div>
         )}
       </div>
     </div>
