@@ -9,14 +9,23 @@ const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
 const app = express();
 
+const defaultFrontendUrl = 'https://studystackdevv.vercel.app';
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
+  process.env.FRONTEND_URL || defaultFrontendUrl,
   'http://localhost:5173',
   'http://localhost:5174'
 ].filter(Boolean);
 
+console.log('Allowed CORS origins:', allowedOrigins);
+
 app.use(cors({
-  origin: allowedOrigins.length ? allowedOrigins : true,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error(`CORS policy blocked origin: ${origin}`));
+  },
   credentials: true
 }));
 app.use(express.json());
