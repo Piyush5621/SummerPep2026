@@ -16,6 +16,8 @@ Add the following in Render service settings:
 - `PORT` = `5000` (optional)
 - `FRONTEND_URL` = your frontend URL if you want CORS restricted
 
+> Important: Render does not automatically use a `.env` file from your repo for deployed services. Set these values in the Render dashboard under Environment.
+
 ## MongoDB Atlas
 - Ensure Atlas IP access list includes Render outbound IPs.
 - For quick testing, add `0.0.0.0/0` temporarily.
