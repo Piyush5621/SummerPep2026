@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -21,8 +21,8 @@ function HeroRedirect() {
             StudyStack brings together guided lessons, practical practice, and a smooth learning flow for students who want to grow every day.
           </p>
           <div className="flex gap-4 flex-wrap justify-start">
-            <a href="/courses" className="btn-primary text-base px-8 py-3">Explore Courses</a>
-            <a href="/register" className="btn-secondary text-base px-8 py-3">Join as Learner</a>
+            <Link to="/courses" className="btn-primary text-base px-8 py-3">Explore Courses</Link>
+            <Link to="/register" className="btn-secondary text-base px-8 py-3">Join as Learner</Link>
           </div>
 
           <div className="mt-8 grid sm:grid-cols-3 gap-3">
