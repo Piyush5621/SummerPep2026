@@ -70,8 +70,8 @@ export default function CoursesPage() {
               ['Fresh', 'Courses'],
               ['Guided', 'Learning'],
               ['Easy', 'Search']
-            ].map(([value, label]) => (
-              <div key={label} className="rounded-2xl border border-white/10 bg-slate-950/35 p-3 text-center">
+            ].map(([value, label], index) => (
+              <div key={label} className="rounded-2xl border border-white/10 bg-slate-950/35 p-4 text-center animate-fade-up" style={{ animationDelay: `${index * 80}ms` }}>
                 <p className="text-lg font-semibold text-white">{value}</p>
                 <p className="text-xs text-slate-400">{label}</p>
               </div>

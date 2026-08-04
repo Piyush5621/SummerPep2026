@@ -107,20 +107,21 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.5rem;
-  background: transparent;
-  color: var(--accent-light);
-  border: 1px solid var(--border-color);
-  border-radius: 0.625rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+  padding: 0.75rem 1.4rem;
+  background: rgba(255,255,255,0.05);
+  color: #dbeafe;
+  border: 1px solid rgba(148,163,184,0.18);
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
 }
 .btn-secondary:hover {
-  background: rgba(79, 140, 255, 0.1);
-  border-color: var(--accent);
   transform: translateY(-1px);
+  border-color: rgba(96,165,250,0.45);
+  color: #f8fafc;
+  background: rgba(14,165,233,0.12);
 }
 
 .btn-danger {
@@ -128,52 +129,61 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(251, 113, 133, 0.15);
-  color: #fecdd3;
-  border: 1px solid rgba(251, 113, 133, 0.28);
-  border-radius: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  background: rgba(251,113,133,0.16);
+  color: #fed7e2;
+  border: 1px solid rgba(251,113,133,0.3);
+  border-radius: 0.95rem;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
-.btn-danger:hover { background: rgba(251, 113, 133, 0.26); border-color: var(--danger); }
+.btn-danger:hover {
+  transform: translateY(-1px);
+  background: rgba(251,113,133,0.28);
+  border-color: rgba(251,113,133,0.45);
+}
 
 .btn-success {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(52, 211, 153, 0.15);
-  color: #a7f3d0;
-  border: 1px solid rgba(52, 211, 153, 0.28);
-  border-radius: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  background: rgba(52,211,153,0.16);
+  color: #d9f99d;
+  border: 1px solid rgba(52,211,153,0.32);
+  border-radius: 0.95rem;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
-.btn-success:hover { background: rgba(52, 211, 153, 0.24); border-color: var(--success); }
+.btn-success:hover {
+  transform: translateY(-1px);
+  background: rgba(52,211,153,0.24);
+  border-color: rgba(52,211,153,0.45);
+}
 
 /* ─── Form Inputs ────────────────────────────────────── */
 .input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 0.625rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 1rem;
   color: var(--text-primary);
   font-size: 0.95rem;
   font-family: 'Inter', sans-serif;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
-.input::placeholder { color: var(--text-muted); }
+.input::placeholder { color: rgba(203,213,225,0.72); }
 .input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
+  border-color: rgba(59,130,246,0.65);
+  box-shadow: 0 0 0 0.25rem rgba(59,130,246,0.12);
+  background: rgba(255,255,255,0.1);
 }
 
 .input-label {
@@ -198,12 +208,20 @@ body {
 
 /* ─── Animations ─────────────────────────────────────── */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(79,140,255,0.18); }
+  50% { box-shadow: 0 0 0 26px rgba(79,140,255,0.08); }
 }
 @keyframes spin {
   to { transform: rotate(360deg); }
@@ -213,19 +231,21 @@ body {
   100% { background-position: 200% 0; }
 }
 
-.animate-fade-up   { animation: fadeInUp 0.4s ease both; }
-.animate-fade-in   { animation: fadeIn 0.3s ease both; }
+.animate-fade-up   { animation: fadeInUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-in   { animation: fadeIn 0.35s ease both; }
+.animate-float     { animation: floatUp 6s ease-in-out infinite; }
+.animate-ripple    { animation: pulseGlow 2.5s ease-in-out infinite; }
 .animate-spin-slow { animation: spin 1s linear infinite; }
 
 .skeleton {
   background: linear-gradient(90deg,
-    rgba(255,255,255,0.04) 25%,
-    rgba(255,255,255,0.08) 50%,
-    rgba(255,255,255,0.04) 75%
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.05) 75%
   );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 0.5rem;
+  background-size: 240% 100%;
+  animation: shimmer 1.75s infinite;
+  border-radius: 0.75rem;
 }
 
 /* ─── Toast ──────────────────────────────────────────── */

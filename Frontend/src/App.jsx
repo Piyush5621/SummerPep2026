@@ -76,7 +76,12 @@ function HeroRedirect() {
 export default function App() {
   return (
     <AuthProvider>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute -left-24 top-10 w-72 h-72 rounded-full bg-sky-500/12 blur-3xl animate-float" />
+          <div className="absolute right-0 bottom-24 w-64 h-64 rounded-full bg-indigo-500/12 blur-3xl animate-float" />
+          <div className="absolute left-1/2 top-1/3 -translate-x-1/2 w-52 h-52 rounded-full bg-fuchsia-500/10 blur-3xl animate-ripple" />
+        </div>
         <Navbar />
         <main className="flex-1">
           <Routes>

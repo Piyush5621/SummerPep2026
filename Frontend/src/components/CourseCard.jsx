@@ -4,12 +4,9 @@ export default function CourseCard({ course, onEdit, onDelete, showActions = fal
   const { _id, title, price, instructor, createdAt } = course;
 
   return (
-    <div className="glass p-6 flex flex-col gap-4 hover:border-sky-500/40 transition-all duration-300 group"
-      style={{ transform: 'translateY(0)', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}
-      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(79,140,255,0.18)'; }}
-      onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = ''; }}
-    >
-      <div className="flex items-start justify-between gap-2">
+    <div className="glass p-6 flex flex-col gap-4 transition-all duration-300 ease-out transform group hover:-translate-y-2 hover:border-sky-500/40 hover:shadow-[0_22px_70px_rgba(59,130,246,0.18)] animate-fade-up">
+      <div className="absolute inset-x-0 -top-px h-1 rounded-t-3xl bg-gradient-to-r from-sky-400 via-indigo-400 to-fuchsia-500 opacity-90" />
+      <div className="relative flex items-start justify-between gap-2">
         <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-sky-900/30 shrink-0">
           {title?.[0]?.toUpperCase()}
         </div>
