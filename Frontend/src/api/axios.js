@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://summerpep2026.onrender.com',
   headers: { 'Content-Type': 'application/json' },
 });
 
