@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const baseURL = import.meta.env.VITE_API_URL || 'https://summerpep2026.onrender.com';
+
 const api = axios.create({
-  baseURL: 'https://summerpep2026.onrender.com',
+  baseURL,
   headers: { 'Content-Type': 'application/json' },
 });
 
