@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const multer = require('multer');
+const FormData = require('form-data');
 const courseRoutes = require('./routes/courseRoutes');
 const authRoutes = require('./routes/authRoutes');
 const axios = require('axios');
@@ -8,6 +10,8 @@ const logger = require('./middlewares/logger');
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
 const app = express();
+const upload = multer({ storage: multer.memoryStorage() });
+const genAIBaseUrl = process.env.GENAI_BASE_URL || 'http://localhost:4000';
 
 const defaultFrontendUrl = 'https://studystackdevv.vercel.app';
 const allowedOrigins = [
@@ -63,30 +67,45 @@ app.get('/', (req, res) => {
   res.send('Welcome to the StudyStack API');
 });
 
-app.post('/api/genai/upload', async (req, res) => {
+app.post('/api/genai/upload', upload.single('pdf'), async (req, res) => {
   try {
-    const formData = req.body && req.body.file ? req.body.file : null;
-    if (!formData) {
+    if (!req.file) {
       return res.status(400).json({ error: 'Please upload a PDF file.' });
     }
 
-    res.json({ message: 'PDF upload is handled by the GenAI service. Please run the GenAI backend separately.' });
+    const formData = new FormData();
+    formData.append('pdf', req.file.buffer, {
+      filename: req.file.originalname,
+      contentType: req.file.mimetype || 'application/pdf',
+    });
+
+    const response = await axios.post(`${genAIBaseUrl}/api/upload`, formData, {
+      headers: {
+        ...formData.getHeaders(),
+      },
+      maxBodyLength: Infinity,
+      maxContentLength: Infinity,
+    });
+
+    res.status(response.status).json(response.data);
   } catch (error) {
-    const message = error?.message || 'Upload failed.';
-    res.status(500).json({ error: message });
+    const statusCode = error?.response?.status || 500;
+    const message = error?.response?.data?.error || error.message || 'Upload failed.';
+    res.status(statusCode).json({ error: message });
   }
 });
 
 app.post('/api/genai/ask', async (req, res) => {
   try {
-    const response = await axios.post('http://localhost:4000/api/ask', {
-      question: req.body.question
+    const response = await axios.post(`${genAIBaseUrl}/api/ask`, {
+      question: req.body.question,
     });
 
-    res.json(response.data);
+    res.status(response.status).json(response.data);
   } catch (error) {
+    const statusCode = error?.response?.status || 500;
     const message = error?.response?.data?.error || error.message;
-    res.status(500).json({ error: message });
+    res.status(statusCode).json({ error: message });
   }
 });
 
