@@ -7,6 +7,7 @@ import RegisterPage from './pages/RegisterPage';
 import CoursesPage from './pages/CoursesPage';
 import CourseDetailPage from './pages/CourseDetailPage';
 import InstructorDashboard from './pages/InstructorDashboard';
+import GenAIAssistantPage from './pages/GenAIAssistantPage';
 
 function HeroRedirect() {
   return (
@@ -90,6 +91,7 @@ export default function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/courses/:id" element={<CourseDetailPage />} />
+            <Route path="/genai" element={<GenAIAssistantPage />} />
             <Route path="/dashboard" element={
               <ProtectedRoute requireInstructor>
                 <InstructorDashboard />

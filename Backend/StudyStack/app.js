@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const courseRoutes = require('./routes/courseRoutes');
 const authRoutes = require('./routes/authRoutes');
-// const chatRoutes = require('./routes/chatRoutes');
+const axios = require('axios');
 
 const logger = require('./middlewares/logger');
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
@@ -63,9 +63,35 @@ app.get('/', (req, res) => {
   res.send('Welcome to the StudyStack API');
 });
 
+app.post('/api/genai/upload', async (req, res) => {
+  try {
+    const formData = req.body && req.body.file ? req.body.file : null;
+    if (!formData) {
+      return res.status(400).json({ error: 'Please upload a PDF file.' });
+    }
+
+    res.json({ message: 'PDF upload is handled by the GenAI service. Please run the GenAI backend separately.' });
+  } catch (error) {
+    const message = error?.message || 'Upload failed.';
+    res.status(500).json({ error: message });
+  }
+});
+
+app.post('/api/genai/ask', async (req, res) => {
+  try {
+    const response = await axios.post('http://localhost:4000/api/ask', {
+      question: req.body.question
+    });
+
+    res.json(response.data);
+  } catch (error) {
+    const message = error?.response?.data?.error || error.message;
+    res.status(500).json({ error: message });
+  }
+});
+
 app.use('/api/courses', courseRoutes);
 app.use('/', authRoutes);
-// app.use('/api', chatRoutes);
 app.use(notFound);
 app.use(errorHandler);
 

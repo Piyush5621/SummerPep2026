@@ -15,7 +15,11 @@ if (process.env.FRONTEND_URL) {
 
 const startServer = async () => {
   try {
-    await connectDB();
+    const dbReady = await connectDB();
+    if (!dbReady) {
+      console.log('MongoDB unavailable; running StudyStack in demo mode.');
+    }
+
     app.listen(PORT, () => {
       console.log(`Express server is live on port ${PORT}`);
     });

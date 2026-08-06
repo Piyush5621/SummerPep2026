@@ -46,6 +46,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-1">
           <NavLink to="/courses">Courses</NavLink>
+          <NavLink to="/genai">AI Assistant</NavLink>
           {isInstructor && <NavLink to="/dashboard">Dashboard</NavLink>}
         </div>
 
@@ -83,6 +84,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden border-t border-sky-900/30 px-4 py-3 flex flex-col gap-2 animate-fade-in">
           <NavLink to="/courses">Courses</NavLink>
+          <NavLink to="/genai">AI Assistant</NavLink>
           {isInstructor && <NavLink to="/dashboard">Dashboard</NavLink>}
           <div className="border-t border-sky-900/30 pt-2 mt-1 flex flex-col gap-2">
             {user ? (
