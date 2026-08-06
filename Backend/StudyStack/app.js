@@ -68,6 +68,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/genai/upload', upload.single('pdf'), async (req, res) => {
+  console.log('Upload proxy hit! Headers:', req.headers);
+  console.log('File:', req.file);
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'Please upload a PDF file.' });

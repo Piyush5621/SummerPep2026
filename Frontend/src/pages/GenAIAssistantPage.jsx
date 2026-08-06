@@ -25,10 +25,20 @@ export default function GenAIAssistantPage() {
     setUploadMessage('');
 
     try {
-      const response = await api.post('/api/genai/upload', formData);
-      setUploadMessage(response.data.message || 'PDF uploaded successfully.');
+      const token = localStorage.getItem('studystack_token');
+      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const res = await fetch(`${baseURL}/api/genai/upload`, {
+        method: 'POST',
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {})
+        },
+        body: formData
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Upload failed.');
+      setUploadMessage(data.message || 'PDF uploaded successfully.');
     } catch (err) {
-      setError(err?.response?.data?.error || 'Upload failed.');
+      setError(err.message || 'Upload failed.');
     } finally {
       setLoading(false);
     }
