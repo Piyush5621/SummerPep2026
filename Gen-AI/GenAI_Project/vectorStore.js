@@ -2,7 +2,7 @@ let store = []; // [{ chunk: "...", embedding: [...] }]
 
 async function embed(text) {
   const apiKey = process.env.GEMINI_API_KEY;
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedContent?key=${apiKey}`;
 
 
   const response = await fetch(url, {
