@@ -25,9 +25,7 @@ export default function GenAIAssistantPage() {
     setUploadMessage('');
 
     try {
-      const response = await api.post('/api/genai/upload', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
+      const response = await api.post('/api/genai/upload', formData);
       setUploadMessage(response.data.message || 'PDF uploaded successfully.');
     } catch (err) {
       setError(err?.response?.data?.error || 'Upload failed.');
